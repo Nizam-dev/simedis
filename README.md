@@ -15,4 +15,4 @@ Sistem Informasi Manajemen dan Rekam Medis Pada Klinik Kecantikan AMC Skin Care 
 
 ## License
 
-The Laravel project software licensed under the [MIT license](Cakleon).
+The Laravel project software licensed under the [Cak Leon](Cakleon).
