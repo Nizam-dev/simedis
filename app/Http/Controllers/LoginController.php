@@ -32,6 +32,9 @@ class LoginController extends Controller
             return redirect()->back()->with('gagal','Username Tidak ditemukan');
         }
         if(Auth::attempt($login)){
+            if(auth()->user()->role == "Dokter"){
+                return redirect('/pasiendokter');
+            }
             return redirect('/');
         }else{
             return redirect()->back()->with('gagal','Password Salah');

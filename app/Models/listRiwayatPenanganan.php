@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class listRiwayatPenanganan extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'riwayat_pelayanan_id',
+        'penanganan_id'
+    ];
 }

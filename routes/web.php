@@ -31,6 +31,7 @@ Route::middleware(['role:Admin,Pimpinan,Dokter'])->group(function () {
     Route::resource('dokter', App\Http\Controllers\DokterController::class);
     Route::post('dokter/harikerja/{id}', [App\Http\Controllers\DokterController::class,"harikerja"]);
     Route::resource('pasien', App\Http\Controllers\PasienController::class);
+    Route::resource('pasiendokter', App\Http\Controllers\PasienDokterController::class);
     Route::resource('penanganan', App\Http\Controllers\PenangananController::class);
     Route::resource('produk', App\Http\Controllers\ProdukController::class);
     Route::post('transaksi', [App\Http\Controllers\TransaksiController::class,'store']);

@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\pasien;
 use App\Models\penanganan;
 use App\Models\produk;
+use App\Models\User;
 
 class PasienController extends Controller
 {
     public function index()
     {
+        $dokters = User::where("role","Dokter")->where("kode_amc",auth()->user()->kode_amc)->get();
         $pasiens =  pasien::all();
         $penanganans =  penanganan::where('amc',auth()->user()->kode_amc)
                                     ->where('status','Aktif')
@@ -18,7 +20,7 @@ class PasienController extends Controller
         $produks =  produk::where('amc',auth()->user()->kode_amc)
                             ->where('status','Aktif')
                             ->get();
-        return view('pages.datapasien',compact('pasiens','penanganans','produks'));
+        return view('pages.datapasien',compact('pasiens','penanganans','produks','dokters'));
     }
 
 

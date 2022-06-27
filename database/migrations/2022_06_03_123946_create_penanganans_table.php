@@ -22,6 +22,7 @@ class CreatePenanganansTable extends Migration
             $table->string('foto');
             $table->string('amc');
             $table->timestamps();
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
         });
     }
 

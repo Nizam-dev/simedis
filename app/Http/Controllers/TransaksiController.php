@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\riwayat_pelayanan;
+use App\Models\listRiwayatPenanganan;
+use App\Models\listRiwayatProduk;
 
 class TransaksiController extends Controller
 {
@@ -13,15 +15,31 @@ class TransaksiController extends Controller
             'keluhan'=>$request->keluhan,
             'diagnosa'=>$request->diagnosa,
             'pasien_id'=>$request->pasien_id,
-            'produk_id'=>$request->produk_id,
-            'penanganan_id'=>$request->penanganan_id,
             'total'=>$request->total,
             'pembayaran'=>$request->pembayaran,
-            'user_id'=>auth()->user()->id,
+            'user_id'=>auth()->user()->role == "Dokter" ? auth()->user()->id : $request->user_id,
             'amc'=>auth()->user()->kode_amc
         ];
+        
+        
+        $transaksi = riwayat_pelayanan::create($transaksi)->id;
 
-        riwayat_pelayanan::create($transaksi);
+        if($request->has("penanganan_id")){
+            foreach($request->penanganan_id as $penanganan){
+                listRiwayatPenanganan::create([
+                    "riwayat_pelayanan_id"=>$transaksi,
+                    "penanganan_id"=>$penanganan
+                ]);
+            }
+        }
+        if($request->has("produk_id")){
+            foreach($request->produk_id as $produk){
+                listRiwayatProduk::create([
+                    "riwayat_pelayanan_id"=>$transaksi,
+                    "produk_id"=>$produk
+                ]);
+            }
+        }
         return redirect()->back()->with('sukses','Berhasil Membuat Transaksi');
     }
 

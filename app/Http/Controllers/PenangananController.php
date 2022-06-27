@@ -73,12 +73,20 @@ class PenangananController extends Controller
    
     public function destroy($id)
     {
-        $penanganan = penanganan::find($id);
+        $penanganan = penanganan::where("id",$id)->with("riwayatpenanganan")->first();
         $foto_lama = public_path('/image/penanganan/'.$penanganan->foto);
-        if(file_exists($foto_lama)){
-            File::delete($foto_lama);
+
+
+        if($penanganan->riwayatpenanganan->isEmpty()){
+            if(file_exists($foto_lama)){
+                File::delete($foto_lama);
+            }
+            $penanganan->forceDelete();
+        }else{
+            $penanganan->delete();
         }
-        $penanganan->delete();
+        
+
         return redirect()->back()->with('sukses','Penanganan '.$penanganan->nama_penanganan.' Berhasil di Hapus');
     }
 

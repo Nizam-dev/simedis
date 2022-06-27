@@ -42,7 +42,7 @@
     <div class="col-md-12">
         <div class="card">
            <div class="row">
-            <div class="col-md-12 datalaporan">
+            <div class="col-md-12 datapenanganan">
                 <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
@@ -53,21 +53,22 @@
                                         <th>Pasien</th>
                                         <th>Produk</th>
                                         <th>Penanganan</th>
-                                        <th>Total</th>
-                                        <th>Status</th>
+                                        <th>Keluhan</th>
+                                        <th>Diagnosa</th>
+                                        <th>Tangani</th>
                                     </tr>
                                 </thead>
                                 
                                 <tbody>
-                                    @foreach($laporans as $laporan)
+                                    @foreach($pasiens as $pasien)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$laporan->created_at->format('d-m-Y')}}</td>
-                                        <td>{{$laporan->nama_pasien}}</td>
+                                        <td>{{$pasien->created_at->format('d-m-Y')}}</td>
+                                        <td>{{$pasien->nama_pasien}}</td>
                                         <td>
                                             <ol>
-                                                @if(!$laporan->Produk->isEmpty())
-                                                    @foreach($laporan->Produk as $produk)
+                                                @if(!$pasien->Produk->isEmpty())
+                                                    @foreach($pasien->Produk as $produk)
                                                     <li>{{$produk->nama_produk}}</li>
                                                     @endforeach
                                                 @endif
@@ -75,17 +76,17 @@
                                         </td>
                                         <td>
                                             <ol>
-                                                @if(!$laporan->Penanganan->isEmpty())
-                                                    @foreach($laporan->Penanganan as $penanganan)
+                                                @if(!$pasien->Penanganan->isEmpty())
+                                                    @foreach($pasien->Penanganan as $penanganan)
                                                     <li>{{$penanganan->nama_penanganan}}</li>
                                                     @endforeach
                                                 @endif
                                             </ol>
                                         </td>
-                                        <td>{{$laporan->total}}</td>
-                                        <td>
-                                                <span class="badge badge-success">Lunas</span>
-                                        </td>
+                                        <td>{{$pasien->keluhan}}</td>
+                                        <td>{{$pasien->diagnosa}}</td>
+                                        <td class="text-center"><i class="fa fa-user-md" onclick="tangani(this,{{$pasien}})"></i></td>
+                                        
                                     </tr>
                                     @endforeach
 
@@ -96,6 +97,29 @@
                     </div>
             </div>
 
+            <div class="col-md-5 border-left d-none updatepenanganan">
+                    <div class="card-body">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            @csrf
+                            @method("patch")
+                            <h6>Penanganan Pasien</h6>
+
+                            <div class="form-group">
+                                <label for="" class="form-label">Keluhan</label>
+                                <textarea id="fkeluhan" name="keluhan" class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="form-label">Diagnosa</label>
+                                <textarea class="form-control" name="diagnosa"></textarea>
+                            </div>
+
+
+                            
+                            <button type="submit" class="btn btn-sm btn-primary float-right mb-2">Simpan</button>
+                        </form>
+                    </div>
+            </div>
                 
            </div>
         </div>
@@ -125,14 +149,20 @@
     @endif
     
     $("#dataTable1").DataTable()
+    
+    function tangani(ini,pasien) {
+        $(".datapenanganan").removeClass("col-md-12")
+        $(".datapenanganan").addClass("col-md-7")
+        $(".updatepenanganan").removeClass("d-none")
+        $(".updatepenanganan form").attr("action","{{url('pasiendokter')}}"+`/${pasien.id}`)
+        $(".updatepenanganan textarea[name='diagnosa']").val(pasien.diagnosa)
+        $(".updatepenanganan textarea[name='keluhan']").val(pasien.keluhan)
+        $(ini).parent().parent().parent().find(".bg-pink").removeClass("bg-pink")
+        $(ini).parent().parent().addClass("bg-pink")
+        $(".updatepenanganan textarea[name='diagnosa']").focus()
+    }
 
 
 
-    $(".closetambah").on('click',()=>{
-        $(".lunasihutang").addClass("d-none")
-        $(".datalaporan").removeClass("col-md-8")
-        $(".datalaporan").addClass("col-md-12")
-        $(".datalaporan").find(".bg-pink").removeClass("bg-pink")
-    })
 </script>
 @endsection

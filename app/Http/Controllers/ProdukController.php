@@ -81,12 +81,19 @@ class ProdukController extends Controller
    
     public function destroy($id)
     {
-        $produk = produk::find($id);
+        $produk = produk::where("id",$id)->with("riwayatproduk")->first();
+
         $foto_lama = public_path('/image/produk/'.$produk->foto);
-        if(file_exists($foto_lama)){
-            File::delete($foto_lama);
+        
+        if($produk->riwayatproduk->isEmpty()){
+            if(file_exists($foto_lama)){
+                File::delete($foto_lama);
+            }
+            $produk->forceDelete();
+        }else{
+            $produk->delete();
         }
-        $produk->delete();
+        
         return redirect()->back()->with('sukses','Produk '.$produk->nama_produk.' Berhasil di Hapus');
     }
 }
