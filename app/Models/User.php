@@ -29,6 +29,7 @@ class User extends Authenticatable
         'role',
         'kode_dokter',
         'password',
+        'tgl_lahir',
     ];
 
     /**

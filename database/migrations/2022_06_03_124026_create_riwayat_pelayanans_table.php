@@ -16,12 +16,8 @@ class CreateRiwayatPelayanansTable extends Migration
         Schema::create('riwayat_pelayanans', function (Blueprint $table) {
             $table->id();
             $table->string('keluhan');
-            $table->string('diagnosa');
+            $table->string('diagnosa')->nullable();
             $table->string('total')->nullable()->default('0');
-            $table->string('pembayaran')->nullable()->default('0');
-            $table->foreignId('pasien_id')->constrained();
-            $table->foreignId('produk_id')->constrained()->nullable();;
-            $table->foreignId('penanganan_id')->constrained()->nullable();;
             $table->foreignId('user_id')->constrained();
             $table->string('amc');
             $table->timestamps();

@@ -26,15 +26,21 @@ Route::post('register', [App\Http\Controllers\RegisterController::class, 'regist
 
 Auth::routes(['register' => false,'login' => false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['role:Admin,Pimpinan,Dokter'])->group(function () {
+    Route::get('/', [App\Http\Controllers\DashboardController::class,'index']);
+    Route::resource('dokter', App\Http\Controllers\DokterController::class);
+    Route::post('dokter/harikerja/{id}', [App\Http\Controllers\DokterController::class,"harikerja"]);
+    Route::resource('pasien', App\Http\Controllers\PasienController::class);
+    Route::resource('penanganan', App\Http\Controllers\PenangananController::class);
+    Route::resource('produk', App\Http\Controllers\ProdukController::class);
+    Route::post('transaksi', [App\Http\Controllers\TransaksiController::class,'store']);
 
-Route::get('/', [App\Http\Controllers\DashboardController::class,'index']);
-Route::get('laporan', [App\Http\Controllers\LaporanController::class,'index']);
-Route::get('dokter', [App\Http\Controllers\DokterController::class,'index']);
-Route::resource('pasien', App\Http\Controllers\PasienController::class);
-Route::resource('penanganan', App\Http\Controllers\PenangananController::class);
-Route::resource('produk', App\Http\Controllers\ProdukController::class);
+});
+
+Route::middleware(['role:Admin,Pimpinan'])->group(function () {
+    Route::get('laporan', [App\Http\Controllers\LaporanController::class,'index']);
+
+});
 
 
-Route::post('transaksi', [App\Http\Controllers\TransaksiController::class,'store']);
-Route::post('lunasi/{id}', [App\Http\Controllers\TransaksiController::class,'lunasi']);
+

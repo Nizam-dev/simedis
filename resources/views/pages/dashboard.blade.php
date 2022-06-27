@@ -12,7 +12,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-black text-uppercase mb-1">
                             Total Transaksi</div>
-                        <div class="h5 mb-0 font-weight-bold text-primary">329</div>
+                        <div class="h5 mb-0 font-weight-bold text-primary">{{$data['transaksi_bwi']}}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-credit-card fa-2x text-white"></i>
@@ -63,7 +63,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-black text-uppercase mb-1">
                             Total Pasien</div>
-                        <div class="h5 mb-0 font-weight-bold text-primary">55</div>
+                        <div class="h5 mb-0 font-weight-bold text-primary">{{$data['pasien_bwi']}}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -82,7 +82,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-black text-uppercase mb-1">
                             Total Transaksi</div>
-                        <div class="h5 mb-0 font-weight-bold text-primary">329</div>
+                        <div class="h5 mb-0 font-weight-bold text-primary">{{$data['transaksi_genteng']}}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-credit-card fa-2x text-white"></i>
@@ -133,7 +133,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-black text-uppercase mb-1">
                             Total Pasien</div>
-                        <div class="h5 mb-0 font-weight-bold text-primary">55</div>
+                        <div class="h5 mb-0 font-weight-bold text-primary">{{$data['pasien_genteng']}}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -152,7 +152,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-black text-uppercase mb-1">
                             Total Transaksi</div>
-                        <div class="h5 mb-0 font-weight-bold text-primary">329</div>
+                        <div class="h5 mb-0 font-weight-bold text-primary">{{$data['transaksi_kesilir']}}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-credit-card fa-2x text-white"></i>
@@ -203,7 +203,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-black text-uppercase mb-1">
                             Total Pasien</div>
-                        <div class="h5 mb-0 font-weight-bold text-primary">55</div>
+                        <div class="h5 mb-0 font-weight-bold text-primary">{{$data['pasien_kesilir']}}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-users fa-2x text-gray-300"></i>

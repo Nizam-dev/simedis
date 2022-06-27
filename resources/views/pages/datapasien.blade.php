@@ -43,7 +43,7 @@
                                         <td>{{$pasien->kode}}</td>
                                         <td>{{$pasien->nama}}</td>
                                         <td>{{$pasien->no_hp}}</td>
-                                        <td class="text-center"><i class="fa fa-street-view" onclick="tangani(this,{{$pasien}})"></i></td>
+                                        <td class="text-center"><i class="fa fa-user-md" onclick="tangani(this,{{$pasien}})"></i></td>
                                     </tr>
 
                                     @endforeach
@@ -72,36 +72,41 @@
                                 <label for="" class="form-label">Diagnosa</label>
                                 <textarea class="form-control" name="diagnosa"></textarea>
                             </div>
+                            
                             <div class="form-group">
                                 <label for="" class="form-label">Pilih Penanganan</label>
-                                <select name="penanganan_id" class="form-control w-100">
-                                    <option value="" class="fp1_">Pilih Penanganan</option>
-                                    @foreach($penanganans as $penanganan)
-                                        <option value="{{$penanganan->id}}" harga='{{$penanganan->harga}}'>{{$penanganan->kode.' - '.$penanganan->nama_penanganan}}</option>
-                                    @endforeach
-                                </select>
+                                
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <select name="penanganan_id[]" class="form-control w-100">
+                                            <option disabled selected class="fp1_">Pilih Penanganan</option>
+                                            @foreach($penanganans as $penanganan)
+                                                <option value="{{$penanganan->id}}" harga='{{$penanganan->harga}}'>{{$penanganan->kode.' - '.$penanganan->nama_penanganan}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-sm btn-primary" onclick="tambahPenanganan()"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="morepenanganan"></div>
                             </div>
 
                             <div class="form-group">
                                 <label for="" class="form-label">Pilih Produk</label>
                                 <select name="produk_id" id="" class="form-control w-100">
-                                    <option value="" class="fp2_">Pilih Produk</option>
+                                    <option disabled selected class="fp2_">Pilih Produk</option>
                                     @foreach($produks as $produk)
                                         <option value="{{$produk->id}}" harga='{{$produk->harga}}'>{{$produk->kode.' - '.$produk->nama_produk}}</option>
                                     @endforeach
                                 </select>
                             </div>
 
-                            <div class="form-group row">
-                                <div class="col-md-6">
+                            <div class="form-group">
                                     <label for="">Total Harga</label>
                                     <input type="text" class="d-none" name="total">
                                     <h5 id="totalharga">0</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="">Pembayaran</label>
-                                    <input type="number" name="pembayaran" calss="form-control" style="width:100%;">
-                                </div>
                             </div>
                             
                             <button class="btn btn-sm btn-primary float-right mb-3" type="submit">Simpan</button>
@@ -181,7 +186,7 @@
     @endif
     
     $(document).ready(function() {
-        $('select[name="penanganan_id"]').select2();
+        $('select[name="penanganan_id[]"]').select2();
         $('select[name="produk_id"]').select2();
         $("#dataTable").DataTable();
     });
@@ -205,19 +210,51 @@
         $(ini).parent().parent().parent().find(".bg-pink").removeClass("bg-pink")
         $(ini).parent().parent().addClass("bg-pink")
         $("#fkeluhan").focus()
+        $(".morepenanganan").empty()
+        $(".tanganicard input[name='total']").val("")
     }
 
-    var totalHarga = 0;
 
     $(".tanganicard select").on('change',()=>{
-        let penanganan = $(".tanganicard select[name='penanganan_id'] option:selected").attr("harga")
-        let produk = $(".tanganicard select[name='produk_id'] option:selected").attr("harga")
-        produk = produk == undefined ? 0 : produk
-        penanganan = penanganan == undefined ? 0 : penanganan
-        totalHarga = parseInt(penanganan)+parseInt(produk)
-        $("#totalharga").html(totalHarga)
-        $(".tanganicard input[name='total']").val(totalHarga)
+        hitungTotal()
     })
+
+    function hitungTotal(){
+        var tot = 0;
+        $('.tanganicard  select').each((index,element)=>{ 
+            let penanganan = $(element).find("option:selected").attr("harga")
+            penanganan = penanganan == undefined ? 0 : penanganan
+            tot = tot + parseInt(penanganan)
+            console.log(penanganan)
+            console.log(tot)
+        })
+        $("#totalharga").html(tot)
+        $(".tanganicard input[name='total']").val(tot)
+    }
+
+    function tambahPenanganan() {
+        $(".morepenanganan").append(`   <div class="row mt-2">
+                <div class="col-md-10">
+                    <select name="penanganan_id[]" class="form-control" onchange="hitungTotal()">
+                        <option disabled selected class="fp1_">Pilih Penanganan</option>
+                        @foreach($penanganans as $penanganan)
+                            <option value="{{$penanganan->id}}" harga='{{$penanganan->harga}}'>{{$penanganan->kode.' - '.$penanganan->nama_penanganan}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-sm btn-danger" onclick="hapusPenanganan(this)"><i class="fa fa-minus"></i></button>
+                </div>
+            </div>`)
+
+        $('select[name="penanganan_id[]"]').select2();
+
+    }
+
+    function hapusPenanganan(ini) {
+            $(ini).parent().parent().remove()
+            hitungTotal()
+    }
 
 
 </script>

@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class riwayat_pelayanan extends Model
+class jadwalDokter extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'keluhan',
-        'diagnosa',
-        'pasien_id',
+        'Senin',
+        'Selasa',
+        'Rabu',
+        'Kamis',
+        'Jumat',
+        'Sabtu',
         'user_id',
-        'total',
-        'amc'
     ];
 }

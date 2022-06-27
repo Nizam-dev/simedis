@@ -68,12 +68,7 @@
                                         <td>{{$laporan->nama_penanganan}}</td>
                                         <td>{{$laporan->total}}</td>
                                         <td>
-                                            @if($laporan->pembayaran < $laporan->total)
-                                                <span class="badge badge-warning">{{$laporan->pembayaran - $laporan->total}}</span>
-                                                <i class="fa fa-edit" onclick="lunasi(this,{{$laporan}})"></i>
-                                            @else
                                                 <span class="badge badge-success">Lunas</span>
-                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -85,33 +80,7 @@
                     </div>
             </div>
 
-                <div class="col-md-4 border-left d-none lunasihutang">
-                        <div class="card-header">
-                            Tambah
-                            <button class="btn btn-sm btn-warning float-right closetambah">
-                                <i class="fas fa-window-close"></i>
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <form action="{{url('lunasi')}}" method="post">
-                                @csrf
-                                <h6>Lunasi Pembayaran</h6>
-
-                                <div class="form-group row">
-                                    <div class="col-md-8">
-                                        <label for="">Pembayaran</label>
-                                        <input type="number" name="pembayaran" class="form-control bayarkan" style="width:100%;" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h6>Lunas</h6>
-                                        <input type="checkbox"  id="lunasisemua">
-                                    </div>
-                                </div>
-                                
-                                <button class="btn btn-sm btn-primary float-right mb-3" type="submit">Simpan</button>
-                            </form>
-                        </div>
-                </div>
+                
            </div>
         </div>
     </div>
@@ -142,26 +111,6 @@
     $("#dataTable1").DataTable()
 
 
-    function lunasi(ini,laporan){
-        $(".datalaporan").removeClass("col-md-12")
-        $(".datalaporan").addClass("col-md-8")
-        $(".lunasihutang").removeClass("d-none")
-        $(".lunasihutang form").attr("action","{{url('lunasi')}}"+"/"+laporan.id)
-        
-        $(ini).parent().parent().parent().find(".bg-pink").removeClass("bg-pink")
-        $(ini).parent().parent().addClass("bg-pink")
-        $(".lunasihutang ").focus()
-
-        $("#lunasisemua").on('click',()=>{
-            if($("#lunasisemua").is(":checked")){
-                $(".bayarkan").val(laporan.total - laporan.pembayaran)
-                $(".bayarkan").prop('readonly', true);
-            }else{
-                $(".bayarkan").val("")
-                $(".bayarkan").prop('readonly', false)
-            }
-        })
-    }
 
     $(".closetambah").on('click',()=>{
         $(".lunasihutang").addClass("d-none")

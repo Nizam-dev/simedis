@@ -25,13 +25,4 @@ class TransaksiController extends Controller
         return redirect()->back()->with('sukses','Berhasil Membuat Transaksi');
     }
 
-    public function lunasi($id,Request $request)
-    {
-        $transaksi = riwayat_pelayanan::find($id);
-        $transaksi->update([
-            'pembayaran'=> $transaksi->pembayaran + $request->pembayaran
-        ]);
-        return redirect()->back()->with('sukses','Pembayaran Berhasil diupdate');
-
-    }
 }

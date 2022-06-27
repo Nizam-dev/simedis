@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Auth;
 
-class admin
+class role
 {
 
     public function handle(Request $request, Closure $next)
@@ -14,12 +14,13 @@ class admin
         if(!Auth::check()){
             return redirect('/login');
         }
-
-        if(Auth::user()->role == "Admin"){
+        $role = Auth()->user()->role;
+        $allowed_roles = array_slice(func_get_args(), 2);
+        if( in_array($role, $allowed_roles) ) {
             return $next($request);
         }else{
-            return redirect('/');
+            return redirect()->back();
         }
-        
+
     }
 }
