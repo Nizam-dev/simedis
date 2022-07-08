@@ -19,6 +19,7 @@ class CreateRiwayatPelayanansTable extends Migration
             $table->string('diagnosa')->nullable();
             $table->string('total')->nullable()->default('0');
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('pasien_id')->constrained();
             $table->string('amc');
             $table->timestamps();
         });

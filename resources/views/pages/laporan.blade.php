@@ -55,6 +55,7 @@
                                         <th>Penanganan</th>
                                         <th>Total</th>
                                         <th>Status</th>
+                                        <th>Di Verifikasi</th>
                                     </tr>
                                 </thead>
                                 
@@ -85,6 +86,9 @@
                                         <td>{{$laporan->total}}</td>
                                         <td>
                                                 <span class="badge badge-success">Lunas</span>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" name="" id="">
                                         </td>
                                     </tr>
                                     @endforeach

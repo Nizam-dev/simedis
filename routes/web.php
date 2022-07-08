@@ -43,5 +43,9 @@ Route::middleware(['role:Admin,Pimpinan'])->group(function () {
 
 });
 
+Route::get('profile', [App\Http\Controllers\profileController::class,'index']);
+Route::post('profile', [App\Http\Controllers\profileController::class,'updateprofil']);
+Route::post('profilefoto', [App\Http\Controllers\profileController::class,'updatefoto']);
+
 
 

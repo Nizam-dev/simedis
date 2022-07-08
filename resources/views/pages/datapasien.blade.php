@@ -68,10 +68,12 @@
                                 <textarea id="fkeluhan" name="keluhan" class="form-control"></textarea>
                             </div>
 
+                            @if(auth()->user()->role == "Dokter")
                             <div class="form-group">
                                 <label for="" class="form-label">Diagnosa</label>
                                 <textarea class="form-control" name="diagnosa"></textarea>
                             </div>
+                            @endif
 
                             @if(auth()->user()->role != "Dokter")
                             <div class="form-group">
