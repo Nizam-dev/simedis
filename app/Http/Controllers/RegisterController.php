@@ -26,6 +26,7 @@ class RegisterController extends Controller
             'kode_amc' => 'required',
             'role' => 'required',
             'nama' => 'required',
+            'username' => 'required',
             'alamat' => 'required',
             'no_hp' => 'required',
             'password' => 'required',

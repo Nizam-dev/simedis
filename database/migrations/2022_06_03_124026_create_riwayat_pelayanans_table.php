@@ -21,6 +21,7 @@ class CreateRiwayatPelayanansTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('pasien_id')->constrained();
             $table->string('amc');
+            $table->boolean('verifikasi')->nullable()->default(false);
             $table->timestamps();
         });
     }

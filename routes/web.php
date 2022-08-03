@@ -32,6 +32,7 @@ Route::middleware(['role:Admin,Pimpinan,Dokter'])->group(function () {
     Route::post('dokter/harikerja/{id}', [App\Http\Controllers\DokterController::class,"harikerja"]);
     Route::resource('pasien', App\Http\Controllers\PasienController::class);
     Route::resource('pasiendokter', App\Http\Controllers\PasienDokterController::class);
+    Route::get('pasiensudahditangani', [App\Http\Controllers\PasienDokterController::class,'pasien_sudah_ditangani']);
     Route::resource('penanganan', App\Http\Controllers\PenangananController::class);
     Route::resource('produk', App\Http\Controllers\ProdukController::class);
     Route::post('transaksi', [App\Http\Controllers\TransaksiController::class,'store']);
@@ -40,12 +41,14 @@ Route::middleware(['role:Admin,Pimpinan,Dokter'])->group(function () {
 
 Route::middleware(['role:Admin,Pimpinan'])->group(function () {
     Route::get('laporan', [App\Http\Controllers\LaporanController::class,'index']);
+    Route::post('laporan/verif', [App\Http\Controllers\LaporanController::class,'verifikasi']);
 
 });
 
-Route::get('profile', [App\Http\Controllers\profileController::class,'index']);
-Route::post('profile', [App\Http\Controllers\profileController::class,'updateprofil']);
-Route::post('profilefoto', [App\Http\Controllers\profileController::class,'updatefoto']);
+Route::get('profile', [App\Http\Controllers\ProfileController::class,'index']);
+Route::post('profile', [App\Http\Controllers\ProfileController::class,'updateprofil']);
+Route::post('profilefoto', [App\Http\Controllers\ProfileController::class,'updatefoto']);
+
 
 
 

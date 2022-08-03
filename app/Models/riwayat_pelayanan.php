@@ -15,7 +15,8 @@ class riwayat_pelayanan extends Model
         'pasien_id',
         'user_id',
         'total',
-        'amc'
+        'amc',
+        'verifikasi',
     ];
 
     public function Penanganan(){

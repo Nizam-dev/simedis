@@ -8,16 +8,12 @@
         <span>Tangani Pasien</span></a>
 </li>
 
-<li class="nav-item {{request()->is('pasien') ? 'active':''}}">
-    <a class="nav-link" href="{{url('pasien')}}">
+<li class="nav-item {{request()->is('pasiensudahditangani') ? 'active':''}}">
+    <a class="nav-link" href="{{url('pasiensudahditangani')}}">
         <i class="fas fa-fw fa-table"></i>
         <span>Data Pasien</span></a>
 </li>
 
-<li class="nav-item {{request()->is('dokter') ? 'active':''}}">
-    <a class="nav-link" href="{{url('dokter')}}">   
-        <i class="fa fa-user-md"></i>
-        <span>Data Dokter</span></a>
-</li>
+
 
 

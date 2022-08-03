@@ -18,7 +18,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $dokter = User::where('role','Dokter');
+        $dokter = User::where('role','Dokter')->get();
         $produk = produk::all();
         $pasien = pasien::all();
         $transaksi = riwayat_pelayanan::all();
@@ -39,6 +39,7 @@ class DashboardController extends Controller
             'transaksi_kesilir' =>  $transaksi->where('amc','AMC Kesilir')->count(),
             'transaksi_genteng' =>  $transaksi->where('amc','AMC Genteng')->count(),
         ];
+
 
         return view('pages.dashboard',compact('data'));
     }

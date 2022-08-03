@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
+    <title>AMC - Register</title>
 
     @include("template.css")
 
@@ -57,7 +57,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="" class="text-black">Kode AMC</label>
-                                            <select name="kode_amc" id="" class="form-control">
+                                            <select name="kode_amc" id="" class="form-control @error('kode_amc') is-invalid @enderror">
                                                 <option value="AMC Banyuwangi">AMC Banyuwangi</option>
                                                 <option value="AMC Genteng">AMC Genteng</option>
                                                 <option value="AMC Kesilir">AMC Kesilir</option>
@@ -66,10 +66,8 @@
 
                                         <div class="form-group">
                                             <label for="" class="text-black">Sebagai</label>
-                                            <select name="role" id="" class="form-control">
+                                            <select name="role" id="" class="form-control @error('role') is-invalid @enderror">
                                                 <option value="Admin">Admin</option>
-                                                <option value="Dokter">Dokter</option>
-                                                <option value="Pimpinan">Pimpinan</option>
                                             </select>
                                         </div>
 
@@ -78,7 +76,7 @@
                                         
                                         <div class="form-group">
                                             <label for="" class="text-black">Nama Lengkap</label>
-                                            <input type="text" name="nama" class="form-control">
+                                            <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror">
                                         </div>
                                         <div class="form-group">
                                             <label for="" class="text-black">Alamat</label>
@@ -86,16 +84,16 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="" class="text-black">No Telepon</label>
-                                            <input name="no_hp" type="text" class="form-control">
+                                            <input name="no_hp" type="text" class="form-control @error('no_hp') is-invalid @enderror">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="" class="text-black">Nama Pengguna</label>
-                                            <input type="text" name="username" class="form-control">
+                                            <input type="text" name="username" class="form-control @error('username') is-invalid @enderror">
                                         </div>
                                         <div class="form-group">
                                             <label for="" class="text-black">Password</label>
-                                            <input name="password" type="password" class="form-control" >
+                                            <input name="password" type="password" class="form-control @error('password') is-invalid @enderror">
                                         </div>
                                         
                                         <button class="btn btn-primary btn-user btn-block" type="submit"> 

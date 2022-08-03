@@ -14,8 +14,8 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Data Pelayanan:</h6>
-            <a class="collapse-item" href="{{url('penanganan')}}">Edit Penanganan</a>
-            <a class="collapse-item" href="{{url('produk')}}">Edit Skin Care</a>
+            <a class="collapse-item" href="{{url('penanganan')}}">Penanganan</a>
+            <a class="collapse-item" href="{{url('produk')}}">Skin Care</a>
         </div>
     </div>
 </li>

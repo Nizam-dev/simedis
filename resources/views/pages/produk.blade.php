@@ -78,7 +78,9 @@
                                     <th>Harga</th>
                                     <th>Status</th>
                                     <th>Stok</th>
+                                    @if(auth()->user()->role == "Admin")
                                     <th>Aktifitas</th>
+                                    @endif
                                 </tr>
                             </thead>
                             
@@ -96,10 +98,12 @@
                                         @endif
                                     </td>
                                     <td>{{$produk->stok}}</td>
+                                    @if(auth()->user()->role == "Admin")
                                     <td>
                                         <i class="fa fa-trash text-danger" onclick="hapusproduk('{{$produk->id}}')"></i>
                                         <i class="fa fa-edit text-warning" onclick="editproduk(this,{{$produk}})"></i>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
 

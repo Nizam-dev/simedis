@@ -77,7 +77,9 @@
                                     <th>Nama Penanganan</th>
                                     <th>Harga</th>
                                     <th>Status</th>
+                                    @if(auth()->user()->role == "Admin")
                                     <th>Aktifitas</th>
+                                    @endif
                                 </tr>
                             </thead>
                             
@@ -94,10 +96,12 @@
                                         <span class="badge badge-danger">Tidak Aktif</span>
                                         @endif
                                     </td>
+                                    @if(auth()->user()->role == "Admin")
                                     <td>
                                         <i class="fa fa-trash text-danger" onclick="hapusproduk('{{$penanganan->id}}')"></i>
                                         <i class="fa fa-edit text-warning" onclick="editproduk(this,{{$penanganan}})"></i>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
 

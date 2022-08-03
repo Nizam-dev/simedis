@@ -36,7 +36,7 @@
 @section('content')
 
 
-<h5 class=" mb-0 text-gray-800 mb-3">Laporan Transaksi</h5>
+<h5 class=" mb-0 text-gray-800 mb-3">Tangani Pasien</h5>
 
 <div class="row listlaporan">
     <div class="col-md-12">
